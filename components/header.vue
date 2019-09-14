@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="header">
       <!-- justify-content:space-between; 左右贴边对齐 -->
       <!-- 文档： https://element.eleme.cn/#/zh-CN/component/layout#dui-qi-fang-shi -->
       <el-row type="flex" class="main" justify="space-between">
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-    .container{
+    .header{
         width: 100%;
         height: 60px;
         line-height: 60px;
