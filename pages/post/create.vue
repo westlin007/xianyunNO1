@@ -102,7 +102,7 @@
             month: nowDate.getMonth() + 1,
             date: nowDate.getDate(),
         }
-        this.systemDate = date.year + '-' + 0 + date.month + '-' + 0 + date.date;
+        this.systemDate = date.year + '-' + 0 + date.month + '-' + date.date;
     },
     methods: {
       handleAddDraft(){
@@ -246,7 +246,7 @@
                 cursor: pointer;
                 position: absolute;
                 top: 0px;
-                right: -5px;;
+                right: -5px;
                 &:hover{
                     color: red;
                 }

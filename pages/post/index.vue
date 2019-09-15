@@ -218,7 +218,7 @@ export default {
 }
 
 .container {
-  margin: 0 auto;
+  margin: 5px auto 0;
   width: 1000px;
   position: relative;
   padding-top: 20px;
