@@ -35,7 +35,9 @@ export default {
     // axios的拦截插件
     '@/plugins/axios',
     //  本地存储的插件
-    { src: '@/plugins/localStorage.js', ssr: false }
+    { src: '@/plugins/localStorage.js', ssr: false },
+	{ src: "@/plugins/nuxt-quill-plugin.js", ssr: false },
+	
   ],
   /*
   ** Nuxt.js dev-modules
