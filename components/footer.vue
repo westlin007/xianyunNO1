@@ -50,7 +50,6 @@ export default {
 
 <style scoped lang="less">
     .footer-wrapper{
-		margin-top: 5px;
         background:#333;
         color:#ccc;
         min-width:1000px;
