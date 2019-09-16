@@ -2,13 +2,13 @@
   <div>
     <el-form :inline="true" ref="form" :model="form">
       <!-- 城市 -->
-      <el-form-item>
-        <el-input 
-        v-model="form.city" 
+      <el-autocomplete
+        v-model="city"
+        :fetch-suggestions="querySearchCity"
         placeholder="城市"
-        ></el-input>
-      </el-form-item>
-      
+        @select="handleSelectCity"
+      ></el-autocomplete>
+
       <!-- 日期 -->
       <el-form-item required>
         <el-col :span="10">
@@ -23,19 +23,19 @@
       </el-form-item>
 
       <!-- 人数 -->
-      <el-form-item>
-        <el-input 
-        placeholder="人数未定" 
-        suffix-icon="el-icon-user" 
-        v-model="form.num"
-        ></el-input>
-      </el-form-item>
+      <el-select v-model="form.num" placeholder=" 0人 ">
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        ></el-option>
+      </el-select>
 
       <!-- 按钮 -->
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">查看价格</el-button>
+        <el-button type="primary" @click="queryPrice">查看价格</el-button>
       </el-form-item>
-      
     </el-form>
   </div>
 </template>
@@ -43,16 +43,84 @@
 export default {
   data() {
     return {
+      city:"",
       form: {
-        city: "",
+        cityId: "",
         date: "",
-        num: "",
-      }
+        num: ""
+      },
+      
+      citList: [],
+      options: [
+        {
+          value: "1",
+          label: "1人"
+        },
+        {
+          value: "2",
+          label: "2人"
+        },
+        {
+          value: "3",
+          label: "3人"
+        },
+        {
+          value: "4",
+          label: "4人"
+        },
+        {
+          value: "5",
+          label: "5人"
+        },
+        {
+          value: "6",
+          label: "6人"
+        }
+      ]
     };
   },
   methods: {
-    onSubmit() {
-      console.log("submit!");
+    // 城市下拉列表
+    querySearchCity(queryString, cb) {
+      this.$axios({
+        url: "/cities?name=" + queryString
+      }).then(res => {
+        // console.log(res);
+        var cityList = res.data.data.map(v => {
+          return {
+            ...v,
+            value: v.name
+          };
+        });
+        var results = queryString
+          ? cityList.filter(this.createFilter(queryString))
+          : cityList;
+        // 显示建议数据
+        cb(results);
+      });
+    },
+    createFilter(queryString) {
+      return citylist => {
+        return citylist.value
+          .toLowerCase()
+          .indexOf(queryString.toLowerCase() > -1);
+      };
+    },
+    // 选择城市
+    handleSelectCity(item) {
+      this.city = item.value;
+      this.form.cityId = item.id
+    },
+    queryPrice() {
+      // this.$axios({
+      //   url:`/hotels`,
+      //   params:{
+      //     city:this.form.cityId
+      //   }
+      // }).then(res=>{
+      //   console.log(res);
+      // })
+      this.$emit("setCity",this.form.cityId);
     }
   }
 };

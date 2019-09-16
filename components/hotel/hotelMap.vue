@@ -5,8 +5,8 @@
 export default {
   mounted() {
     window.onLoad = function() {
-      var map = new AMap.Map("container",{
-          zoom:12,  //级别
+      var map = new AMap.Map("container", {
+        zoom: 12 //级别
       });
     };
     var url =
@@ -19,8 +19,8 @@ export default {
 };
 </script>
 <style scoped>
-    #container{
-        width: 420px;
-        height: 260px;
-    }
+#container {
+  width: 420px;
+  height: 260px;
+}
 </style>
