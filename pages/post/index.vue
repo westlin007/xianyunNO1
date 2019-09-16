@@ -477,4 +477,7 @@ export default {
   font-size: 12px;
   padding-right: 5px;
 }
+.el-pagination{
+  margin: 10px;
+}
 </style>

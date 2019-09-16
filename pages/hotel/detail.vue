@@ -26,12 +26,12 @@
     <!-- 图片 -->
     <div class="Displayimg">
       <div class="img1">
-        <img src="@/static/1.jpeg" v-if="message===1" />
-        <img src="@/static/2.jpeg" v-if="message===2" />
-        <img src="@/static/3.jpeg" v-if="message===3" />
-        <img src="@/static/4.jpeg" v-if="message===4" />
-        <img src="@/static/5.jpeg" v-if="message===5" />
-        <img src="@/static/6.jpeg" v-if="message===6" />
+        <img src="@/static/1.jpeg" v-show="message===1" />
+        <img src="@/static/2.jpeg" v-show="message===2" />
+        <img src="@/static/3.jpeg" v-show="message===3" />
+        <img src="@/static/4.jpeg" v-show="message===4" />
+        <img src="@/static/5.jpeg" v-show="message===5" />
+        <img src="@/static/6.jpeg" v-show="message===6" />
       </div>
       <div class="img2">
         <el-row>
@@ -68,17 +68,17 @@
         :key="index"
       >
         <el-col :span="8">
-          <a href="https://hotels.ctrip.com/hotel/694679.html">
+          <a href="#">
             <div class="grid-content bg-purple">{{item.name}}</div>
           </a>
         </el-col>
         <el-col :span="8">
-          <a href="https://hotels.ctrip.com/hotel/694679.html">
+          <a href="#">
             <div class="grid-content bg-purple-light">{{item.bestType}}</div>
           </a>
         </el-col>
         <el-col :span="8">
-          <a href="https://hotels.ctrip.com/hotel/694679.html">
+          <a href="#">
             <div class="grid">
               ￥{{item.price}}
               <span>起</span> >
@@ -122,7 +122,7 @@
 
     <!-- 评分 -->
     <div class="grade">
-      <h4>2条真实在用户评论</h4>
+      <h4>{{common_remarks}}条真实在用户评论</h4>
       <!-- 四条真是用户评论 -->
       <el-row type="flex" align="middle">
         <el-col :span="5">
@@ -162,42 +162,6 @@
         </el-col>
       </el-row>
     </div>
-
-    <!-- 用户评论区域 -->
-    <!-- <div class="comment">
-      <div class="pingluninput">
-        <ul v-for="(item,index) in hotel.content" :key="index">
-          <li>
-            <div class="wenzi">{{item}}</div>
-            <br />
-            <el-row type="flex" justify="space-between">
-              <el-row class="boom" type="flex" direction="vertical" align="center">
-                <img src="@/static/7.jpeg" />
-                <p>2019-6-26</p>
-              </el-row>
-              <el-input placeholder="添加回复">
-                <span></span>
-              </el-input>
-              <p>
-                <el-button type="primary">回复</el-button>
-              </p>
-            </el-row>
-            <ul class="asd" v-for="(v,i) in hotel.followed.content" :key="i">
-              <li>
-                <div class="wenzi">{{v}}</div>
-                <el-row type="flex" justify="space-between">
-                  <el-row class="boom" type="flex" direction="vertical" align="center">
-                    <img src="@/static/7.jpeg" />
-                    <p>2019-6-26</p>
-                  </el-row>
-                  <el-input placeholder="添加回复"></el-input>
-                </el-row>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -267,7 +231,7 @@ export default {
         }
       ],
       //评分
-      value: 3.5
+      value: 0
     };
   },
   mounted() {
@@ -283,7 +247,7 @@ export default {
       this.city = data[0].city.id;
       this.products = data[0].products;
       this.hotelassets = data[0].hotelassets;
-      this.value = res.data.data[0].hotellevel.level;
+      this.value = res.data.data[0].stars;
       this.common_remarks = res.data.data[0].common_remarks;
       this.good_remarks = res.data.data[0].good_remarks;
       this.location = res.data.data[0].location;
@@ -428,9 +392,9 @@ export default {
 .tab li {
   padding-right: 100px;
 }
-// .grade {
-//   display: flex;
-// }
+.grade {
+  margin-bottom: 40px;
+}
 .grade h4 {
   margin-bottom: 20px;
 }
