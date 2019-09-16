@@ -53,7 +53,9 @@ ul,li,ol{
 i,em{
   font-style: normal;
 }
-
+img{
+	width: 100%;
+}
 a{
   color:inherit; 
   text-decoration: none;

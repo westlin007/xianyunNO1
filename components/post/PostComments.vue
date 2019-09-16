@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <h4>评论</h4>
-    <div>
+    <div class="pinglunk">
       <!-- 输入框 -->
       <el-input type="textarea" :rows="2" placeholder="说点什么吧..." v-model="content" resize="none"></el-input>
     </div>
@@ -117,7 +117,7 @@ export default {
 
 <style>
 #container {
-  width: 800px;
+  width: 700px;
 }
 h4 {
   font-size: 18px;

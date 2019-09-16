@@ -34,6 +34,19 @@
 
       <div class="aside">
         <h4>相关攻略</h4>
+		<div class="recommend" v-for="(item,index) in recommend" :key="index">
+		  <nuxt-link :to="`/post/detail?id=${item.id}`">
+		    <div class="recommend_list">
+		      <div class="recommend_left">
+		        <img :src="item.images[0]" alt />
+		      </div>
+		      <div class="recommend_right">
+		        <div class="recommend_tittle">{{item.title}}</div>
+		        <p class="recommend_read">{{item.updated_at}} 阅读 {{item.watch}}</p>
+		      </div>
+		    </div>
+		  </nuxt-link>
+		</div>
       </div>
     </el-row>
   </section>
@@ -77,6 +90,37 @@ export default {
 
       // console.log(this.article);
     });
+	this.$axios({
+	  url: "posts/recommend",
+	  parmas: { id: this.$route.query.id }
+	}).then(res => {
+	  this.recommend = res.data.data;
+	  this.recommend.forEach((item, index) => {
+	    item.updated_at = moment(item.updated_at).format("YYYY-MM-DD HH:mm");
+	  });
+	});
+  },
+  watch: {
+    $route() {
+      this.$axios({
+        url: "/posts",
+        params: { id: this.$route.query.id }
+      }).then(res => {
+        this.detail = res.data.data[0];
+        this.detail.updated_at = moment(this.detail.updated_at).format(
+          "YYYY-MM-DD HH:mm"
+        );
+      });
+      this.$axios({
+        url: "posts/recommend",
+        parmas: { id: this.$route.query.id }
+      }).then(res => {
+        this.recommend = res.data.data;
+        this.recommend.forEach((item, index) => {
+          item.updated_at = moment(item.updated_at).format("YYYY-MM-DD HH:mm");
+        });
+      });
+    }
   }
 };
 </script>
@@ -108,6 +152,40 @@ export default {
       border-bottom: 1px solid #ddd;
       color: #999;
     }
+	.recommend {
+	  a {
+	    .recommend_list {
+	      display: flex;
+	      padding: 20px 0px;
+	      border-bottom: 1px solid #999;
+	      .recommend_left {
+	        img {
+	          width: 100px;
+	          height: 80px;
+	          margin-right: 10px;
+	        }
+	      }
+	      .recommend_right {
+	        position: relative;
+	        overflow: hidden;
+	        .recommend_tittle {
+	          width: 170px;
+	          height: 45px;
+	          font-size: 16px;
+	          overflow: hidden;
+	        }
+	        .recommend_read {
+	          font-size: 12px;
+	          color: #999;
+	          position: absolute;
+	          left: 0;
+	          bottom: 0;
+	        }
+	      }
+	    }
+	  }
+	}
+	
   }
 }
 </style>
